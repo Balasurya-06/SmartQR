@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -14,13 +14,13 @@ export default function WiFiTemplate() {
   const [password, setPassword] = useState("")
   const [security, setSecurity] = useState("WPA")
   const [hidden, setHidden] = useState(false)
-  const navigate = useNavigate()
+  const router = useRouter()
 
   const generateWiFiQR = () => {
     const prompt = `Create a WiFi QR code for network "${networkName}" with password "${password}" using ${security} security${hidden ? " (hidden network)" : ""}`
 
     sessionStorage.setItem("qr-prompt", prompt)
-    navigate("/generate")
+    router.push("/generate")
   }
 
   return (
@@ -29,7 +29,7 @@ export default function WiFiTemplate() {
       <header className="border-b border-slate-200/60 bg-white/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center space-x-4">
-            <Button variant="ghost" onClick={() => navigate("/")}>
+            <Button variant="ghost" onClick={() => router.push("/")}>
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>

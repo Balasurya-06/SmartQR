@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useRef } from "react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,7 +9,7 @@ import { Badge } from "@/components/ui/badge"
 import { Mic, MicOff, Sparkles, Wifi, User, Calendar, ArrowRight, Zap } from "lucide-react"
 
 export default function HomePage() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [prompt, setPrompt] = useState("")
   const [isListening, setIsListening] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
@@ -93,7 +93,7 @@ export default function HomePage() {
     sessionStorage.setItem("qr-prompt", prompt)
 
     // Navigate to generate page
-    navigate("/generate")
+    router.push("/generate")
   }
 
   return (
@@ -110,7 +110,7 @@ export default function HomePage() {
                 SmartQR
               </span>
             </div>
-            <Button variant="outline" onClick={() => navigate("/analytics")} className="hidden sm:flex">
+            <Button variant="outline" onClick={() => router.push("/analytics")} className="hidden sm:flex">
               Analytics
             </Button>
           </div>
@@ -212,7 +212,7 @@ export default function HomePage() {
             <Card
               key={index}
               className="group hover:shadow-xl transition-all duration-300 cursor-pointer border-2 hover:border-blue-200"
-              onClick={() => navigate(template.path)}
+              onClick={() => router.push(template.path)}
             >
               <CardContent className="p-6 text-center">
                 <div

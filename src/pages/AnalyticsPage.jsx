@@ -1,14 +1,14 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, BarChart3, Trash2, Eye } from "lucide-react"
 
 export default function AnalyticsPage() {
-  const navigate = useNavigate()
+  const router = useRouter()
   const [analytics, setAnalytics] = useState([])
   const [stats, setStats] = useState({
     total: 0,
@@ -100,7 +100,7 @@ export default function AnalyticsPage() {
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
-              <Button variant="ghost" onClick={() => navigate("/")}>
+              <Button variant="ghost" onClick={() => router.push("/")}>
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back
               </Button>
@@ -169,7 +169,7 @@ export default function AnalyticsPage() {
               <BarChart3 className="w-16 h-16 text-slate-300 mx-auto mb-4" />
               <h3 className="text-xl font-semibold text-slate-900 mb-2">No Analytics Data</h3>
               <p className="text-slate-600 mb-6">Start generating QR codes to see your analytics here</p>
-              <Button onClick={() => navigate("/")}>Generate Your First QR</Button>
+              <Button onClick={() => router.push("/")}>Generate Your First QR</Button>
             </CardContent>
           </Card>
         ) : (
