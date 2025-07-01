@@ -9,10 +9,10 @@ import { Badge } from "@/components/ui/badge"
 import { Mic, MicOff, Sparkles, Wifi, User, Calendar, ArrowRight, Zap } from "lucide-react"
 
 export default function HomePage() {
+  const navigate = useNavigate()
   const [prompt, setPrompt] = useState("")
   const [isListening, setIsListening] = useState(false)
   const [isGenerating, setIsGenerating] = useState(false)
-  const navigate = useNavigate()
   const recognitionRef = useRef(null)
 
   const examplePrompts = [

@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, BarChart3, Trash2, Eye } from "lucide-react"
 
 export default function AnalyticsPage() {
+  const navigate = useNavigate()
   const [analytics, setAnalytics] = useState([])
   const [stats, setStats] = useState({
     total: 0,
@@ -17,7 +18,6 @@ export default function AnalyticsPage() {
     text: 0,
     today: 0,
   })
-  const navigate = useNavigate()
 
   useEffect(() => {
     loadAnalytics()
