@@ -20,16 +20,30 @@ export default function AnalyticsPage() {
   const router = useRouter()
 
   useEffect(() => {
-    loadAnalytics()
-  }, [])
+    if (typeof window !== 'undefined') {
+      loadAnalytics();
+    }
+  }, []);
 
+  // Update the loadAnalytics function to handle dates more safely
   const loadAnalytics = () => {
+    // Only run this on the client side
+    if (typeof window === 'undefined') return;
+    
     const data = JSON.parse(localStorage.getItem("qr-analytics") || "[]")
     setAnalytics(data.reverse()) // Show newest first
 
-    // Calculate stats
-    const today = new Date().toDateString()
-    const todayCount = data.filter((item) => new Date(item.timestamp).toDateString() === today).length
+    // Calculate stats - use a function to compare only date portions
+    const isSameDay = (date1, date2) => {
+      const d1 = new Date(date1);
+      const d2 = new Date(date2);
+      return d1.getFullYear() === d2.getFullYear() &&
+             d1.getMonth() === d2.getMonth() &&
+             d1.getDate() === d2.getDate();
+    }
+    
+    const now = new Date();
+    const todayCount = data.filter(item => isSameDay(item.timestamp, now)).length;
 
     const typeCount = data.reduce((acc, item) => {
       acc[item.type.toLowerCase()] = (acc[item.type.toLowerCase()] || 0) + 1
