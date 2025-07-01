@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label"
 import { Slider } from "@/components/ui/slider"
 import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, Download, Palette, ImageIcon, RotateCcw, Copy, Sparkles, Settings } from "lucide-react"
-import { QRGenerator } from "@/components/QRGenerator"
+import { QRGenerator } from "../components/QRGenerator"
 
 export default function GeneratePage() {
   const [prompt, setPrompt] = useState("")
